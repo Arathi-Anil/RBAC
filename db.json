@@ -10,6 +10,11 @@
       "id": "0665",
       "name": "Nia",
       "role": "Admin"
+    },
+    {
+      "id": "8b7a",
+      "name": "Appu",
+      "role": "User"
     }
   ],
   "roles": [
@@ -37,30 +42,8 @@
       ]
     },
     {
-      "id": "7f2e",
-      "name": "",
-      "permissions": []
-    },
-    {
-      "id": "012e",
-      "name": "",
-      "permissions": []
-    },
-    {
-      "id": "2a09",
-      "name": "",
-      "permissions": [
-        "Write"
-      ]
-    },
-    {
-      "id": "3715",
-      "name": "",
-      "permissions": []
-    },
-    {
       "id": "37af",
-      "name": "head",
+      "name": "Test User 11",
       "permissions": [
         "Write"
       ]
@@ -70,6 +53,13 @@
       "name": "Employee 2",
       "permissions": [
         "Write"
+      ]
+    },
+    {
+      "id": "859b",
+      "name": "Test",
+      "permissions": [
+        "Read"
       ]
     }
   ]

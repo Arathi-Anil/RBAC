@@ -10,5 +10,7 @@ export const addUser = (user) => api.post('/users', user);
 export const addRole = (role) => api.post('/roles', role);
 export const updateUser = (user) => api.put(`/users/${user.id}`, user);
 export const deleteUser = (id) => api.delete(`/users/${id}`);
+export const deleteRole = (id) => api.delete(`/roles/${id}`);  // Added deleteRole
+export const updateRole = (id, role) => api.put(`/roles/${id}`, role); // Add this line to update the role
 export const assignRoleToUser = (id, role) => api.patch(`/users/${id}`, { role });
 export const assignPermissionsToRole = (id, permissions) => api.patch(`/roles/${id}`, { permissions });
