@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { getUsers, addUser, deleteUser, updateUser } from '../services/api';
-import { Button, TextField, List, ListItem, ListItemText, Select, MenuItem, Grid, Card, Typography, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { getUsers, addUser, deleteUser, updateUser, getRoles } from '../services/api';
+import { Button, TextField, List, ListItem, ListItemText, Select, MenuItem, Grid, Card, Typography, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel } from '@mui/material';
 
 const UserManagement = () => {
   const [users, setUsers] = useState([]);
   const [newUser, setNewUser] = useState({ name: '', role: '' });
   const [loading, setLoading] = useState(false);
+  const [roles, setRoles] = useState([]);  // Store roles fetched from the API
   const [editUser, setEditUser] = useState(null); // Track the user being edited
   const [openEditDialog, setOpenEditDialog] = useState(false); // Dialog visibility state
 
@@ -14,6 +15,14 @@ const UserManagement = () => {
     getUsers()
       .then(response => setUsers(response.data))
       .finally(() => setLoading(false));
+
+    // Fetch roles for the dropdown
+    getRoles().then(response => {
+      setRoles(response.data);  // Store roles from API response
+    }).catch(error => {
+      console.error("Error fetching roles:", error);
+      setLoading(false);
+    });
   }, []);
 
   const handleAddUser = () => {
@@ -81,15 +90,22 @@ const UserManagement = () => {
             />
           </Grid>
           <Grid item xs={6}>
-            <Select
-              label="Role"
-              value={newUser.role}
-              onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
-              fullWidth
-            >
-              <MenuItem value="Admin">Admin</MenuItem>
-              <MenuItem value="User">User</MenuItem>
-            </Select>
+            <FormControl fullWidth sx={{ marginTop: 1 }}>
+              <InputLabel id="role-label">Role</InputLabel>
+              <Select
+                labelId="role-label"
+                label="Role"
+                value={newUser.role}
+                onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
+              >
+                <MenuItem value=""><em>Choose a Role</em></MenuItem>
+                {roles.map((role) => (
+                  <MenuItem key={role.id} value={role.name}>
+                    {role.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Grid>
         </Grid>
         <Button
@@ -127,15 +143,20 @@ const UserManagement = () => {
               Edit
             </Button>
 
-            <Select
-              value={user.role}
-              onChange={(e) => handleRoleChange(user.id, e.target.value)}
-              sx={{ marginLeft: 2 }}
-              disabled={loading}
-            >
-              <MenuItem value="Admin">Admin</MenuItem>
-              <MenuItem value="User">User</MenuItem>
-            </Select>
+            <FormControl sx={{ marginLeft: 2 }} disabled={loading}>
+              <InputLabel id={`role-label-${user.id}`}>Role</InputLabel>
+              <Select
+                labelId={`role-label-${user.id}`}
+                value={user.role}
+                onChange={(e) => handleRoleChange(user.id, e.target.value)}
+              >
+                {roles.map((role) => (
+                  <MenuItem key={role.id} value={role.name}>
+                    {role.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </ListItem>
         ))}
       </List>
@@ -153,15 +174,22 @@ const UserManagement = () => {
             onChange={(e) => setEditUser({ ...editUser, name: e.target.value })}
             sx={{ marginBottom: 2 }}
           />
-          <Select
-            label="Role"
-            value={editUser?.role || ''}
-            onChange={(e) => setEditUser({ ...editUser, role: e.target.value })}
-            fullWidth
-          >
-            <MenuItem value="Admin">Admin</MenuItem>
-            <MenuItem value="User">User</MenuItem>
-          </Select>
+          <FormControl fullWidth sx={{ marginTop: 1 }}>
+            <InputLabel id="role-label-edit">Role</InputLabel>
+            <Select
+              labelId="role-label-edit"
+              label="Role"
+              value={editUser?.role || ''}
+              onChange={(e) => setEditUser({ ...editUser, role: e.target.value })}
+            >
+              <MenuItem value=""><em>Choose a Role</em></MenuItem>
+              {roles.map((role) => (
+                <MenuItem key={role.id} value={role.name}>
+                  {role.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseEditDialog} color="secondary">
