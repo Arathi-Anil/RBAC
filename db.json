@@ -1,0 +1,76 @@
+{
+  "users": [
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "role": "Admin",
+      "status": "Inactive"
+    },
+    {
+      "id": "0665",
+      "name": "Nia",
+      "role": "Admin"
+    }
+  ],
+  "roles": [
+    {
+      "id": "1",
+      "name": "Admin",
+      "permissions": [
+        "Read",
+        "Write",
+        "Delete"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "User",
+      "permissions": [
+        "Read"
+      ]
+    },
+    {
+      "id": "07da",
+      "name": "Employee",
+      "permissions": [
+        "Read"
+      ]
+    },
+    {
+      "id": "7f2e",
+      "name": "",
+      "permissions": []
+    },
+    {
+      "id": "012e",
+      "name": "",
+      "permissions": []
+    },
+    {
+      "id": "2a09",
+      "name": "",
+      "permissions": [
+        "Write"
+      ]
+    },
+    {
+      "id": "3715",
+      "name": "",
+      "permissions": []
+    },
+    {
+      "id": "37af",
+      "name": "head",
+      "permissions": [
+        "Write"
+      ]
+    },
+    {
+      "id": "6d80",
+      "name": "Employee 2",
+      "permissions": [
+        "Write"
+      ]
+    }
+  ]
+}
