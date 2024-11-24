@@ -37,7 +37,7 @@ Key capabilities include:
 ---
 
 ## Project Structure
-
+```
 rbac-dashboard/
 ├── node_modules/           # Dependencies
 ├── public/                 # Static assets
@@ -60,7 +60,7 @@ rbac-dashboard/
 ├── package-lock.json       # Detailed dependency tree
 ├── README.md               # Project documentation
 ├── .gitignore              # Files and directories to ignore in Git
-
+```
 
 
 ---
